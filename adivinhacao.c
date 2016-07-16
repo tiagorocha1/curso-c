@@ -20,6 +20,13 @@ int main() {
 		printf("Qual o seu chute? ");
 	    scanf("%d",&chute);
 
+	    if(chute < 0){
+
+	    	printf("Você não pode chutar números negativos!\n");
+	    	--i;
+	    	continue;
+	    }
+
 	  	int acertou = (chute==numeroSecreto);
 	  	int maior = (chute > numeroSecreto);
 
