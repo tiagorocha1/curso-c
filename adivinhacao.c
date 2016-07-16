@@ -1,21 +1,21 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 
 int main() {
-
- 	//Imprimi o cabeçalho do jogo
+	
+	//Imprimi o cabeçalho do jogo
     printf("************************************\n");
     printf("* Bem vindo ao Jogo de Adivinhação *\n");
     printf("************************************\n");
 
     int numeroSecreto = 42;
 
-    int chute;
+    int chute=-1;
 
     int tentativas =1;
-	
-	
 
+   	double pontos = 1000;
+	
 	while(1){
 	
 		printf("Tentativa %d\n",tentativas );
@@ -49,8 +49,13 @@ int main() {
 		   	}
 	    	
 	    	tentativas++;
+
+	    	double pontosPerdidos = abs(chute - numeroSecreto) / (double)2 ;
+
+	    	pontos = pontos - pontosPerdidos;
 	}
     
     printf("Fim de Jogo!\n");
     printf("Você acertou em %d tentativas\n", tentativas);
+    printf("Total de pontos %.2f\n",pontos );
 }
