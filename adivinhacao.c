@@ -3,7 +3,7 @@
 #define NUMERO_DE_TENTATIVAS 5
 int main() {
 
-	//Imprimi o cabeçalho do jogo
+ 	//Imprimi o cabeçalho do jogo
     printf("************************************\n");
     printf("* Bem vindo ao Jogo de Adivinhação *\n");
     printf("************************************\n");
@@ -12,8 +12,7 @@ int main() {
 
     int chute;
 	
-	int acertou = (chute==numeroSecreto);
-
+	
 
 	for (int i = 1; i <= NUMERO_DE_TENTATIVAS; i++){
 	
@@ -21,7 +20,8 @@ int main() {
 		printf("Qual o seu chute? ");
 	    scanf("%d",&chute);
 
-	    acertou = (chute==numeroSecreto);
+	  	int acertou = (chute==numeroSecreto);
+	  	int maior = (chute > numeroSecreto);
 
 	    printf("Seu chute foi %d \n",chute);
 
@@ -31,24 +31,17 @@ int main() {
 		    	printf("Jogue de novo, Você é um bom joagador!!\n");
 
 		    	break;
-		    }else{
 
-		    	int maior = (chute > numeroSecreto);
-
-		    	if(maior){
+		    }else if(maior){
 		    	
 		    		printf("Seu chute foi maior que o número secreto\n");
 
-		    	}else {
-
+		    }else{
 		    		printf("Seu chute foi menor que o número secreto\n");
-		    	}
+		   	}
 	    	
-	    	}
+	    	
 	}
-
-
-	
     
     printf("Fim de Jogo!\n");
 }
