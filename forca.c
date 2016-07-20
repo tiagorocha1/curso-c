@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+
+//variaveis globais
 char palavrasecreta[20];
 char chutes[26];
 int tentativas = 0;
@@ -33,8 +35,6 @@ int jachutou(char letra) {
 
 void desenhaforca() {
 
-    printf("Você já deu %d chutes\n", tentativas);
-
     for(int i = 0; i < strlen(palavrasecreta); i++) {
 
         if(jachutou(palavrasecreta[i])) {
@@ -52,10 +52,32 @@ void escolhepalavra() {
     sprintf(palavrasecreta, "MELANCIA");
 }
 
+int enforcou(){
+
+    int erros;
+
+    for (int i = 0; i < tentativas; i++){
+        
+        int existe = 0;
+
+        for (int j = 0; j < strlen(palavrasecreta); j++){
+            
+            if(chutes[i] == palavrasecreta[j]){
+               
+                existe = 1;
+                break;
+            }
+        }
+
+        if(!existe) erros++;
+    }
+
+    return erros >= 5;
+}
+
 int main() {
 
     int acertou = 0;
-    int enforcou = 0;
 
     abertura();
     escolhepalavra();
@@ -67,6 +89,6 @@ int main() {
 
         tentativas++;
 
-    } while (!acertou && !enforcou);
+    } while (!acertou && !enforcou());
 
 }
