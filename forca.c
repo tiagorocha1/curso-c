@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include "forca.h"
 
 
 //variaveis globais
@@ -49,7 +52,28 @@ void desenhaforca() {
 }
 
 void escolhepalavra() {
-    sprintf(palavrasecreta, "MELANCIA");
+    
+    FILE* f;
+
+    f = fopen("palavras.txt","r");
+
+    if(f == 0 ){
+        printf("Desculpe, banco de dados não disponível\n");
+        exit(1);
+    }
+
+    int qtdDePalavras;
+    fscanf(f,"%d",&qtdDePalavras);
+
+    srand(time(0));
+    int randomico = rand() % qtdDePalavras;
+
+    for (int i = 0; i <=randomico; i++){
+        
+        fscanf(f,"%s",palavrasecreta);
+    }
+
+    fclose(f);
 }
 
 int enforcou(){
@@ -62,7 +86,7 @@ int enforcou(){
 
         for (int j = 0; j < strlen(palavrasecreta); j++){
             
-            if(chutes[i] == palavrasecreta[j]){
+            if(jachutou(palavrasecreta[j])){
                
                 existe = 1;
                 break;
@@ -75,9 +99,18 @@ int enforcou(){
     return erros >= 5;
 }
 
-int main() {
+int acertou(){
 
-    int acertou = 0;
+    for (int i = 0; i < strlen(palavrasecreta); i++){
+        if(!jachutou(palavrasecreta[i])){
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int main() {
 
     abertura();
     escolhepalavra();
@@ -89,6 +122,6 @@ int main() {
 
         chutesDados++;
 
-    } while (!acertou && !enforcou());
+    } while (!acertou() && !enforcou());
 
 }
